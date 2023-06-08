@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NMSG Client</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"></script>
+  <script>
+    var sock = io();
+    sock.on("connect", function() {
+      console.log("Connection opened");
+    });
+    sock.on("message", function(data) {
+      console.log("Received message: " + data);
+    });
+    sock.on("error", function(error) {
+      console.log("Error: " + error);
+    });
+    function send() {
+      var user = document.getElementById("user").value;
+      var password = document.getElementById("password").value;
+      var another_user = document.getElementById("another_user").value;
+      var title = document.getElementById("title").value;
+      var text = document.getElementById("text").value;
+      var method = document.getElementById("method").value;
+      sock.emit(method, user, password, another_user, title, text);
+    }
+  </script>
+</head>
+<body>
+  <h1>NMSG Client</h1>
+  <p>This is a simple NMSG client that can be used to send and receive messages.</p>
+  <select id="method">
+    <option value="SEND">SEND</option>
+    <option value="LIST">LIST</option>
+  </select>
+  <input type="text" id="user" placeholder="User">
+  <input type="password" id="password" placeholder="Password">
+  <input type="text" id="another_user" placeholder="Another user">
+  <input type="text" id="title" placeholder="Title">
+  <input type="text" id="text" placeholder="Text">
+  <input type="button" onclick="send()" value="Send">
+  <h2>Response</h2>
+  <p id="response"></p>
+</body>
+</html>
 
