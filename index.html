@@ -5,13 +5,14 @@
   <title>NMSG Client</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"></script>
   <script>
-    var sock = io();
+    var sock = io("serveo.net", 4096);
     sock.on("connect", function() {
       console.log("Connection opened");
     });
     sock.on("message", function(data) {
-      console.log("Received message: " + data);
+      document.getElementById("response").innerHTML = data;
     });
+
     sock.on("error", function(error) {
       console.log("Error: " + error);
     });
