@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>NMSG Client</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"></script>
-  <script>
+  <script defer>
     var sock = io("serveo.net", 4096);
     sock.on("connect", function() {
       console.log("Connection opened");
